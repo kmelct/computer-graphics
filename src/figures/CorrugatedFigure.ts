@@ -17,7 +17,7 @@ export class CorrugatedFigure implements IFigure {
     this._a = opts.A || 5;
   }
 
-  draw(u: number, v: number, target: any): void {
+  draw = (u: number, v: number, target: any) => {
     u = u * Math.PI * 2;
     v = v * Math.PI;
 
@@ -33,5 +33,5 @@ export class CorrugatedFigure implements IFigure {
     const z = R * Math.sin(v);
 
     target.set(x, y, z);
-  }
+  };
 }

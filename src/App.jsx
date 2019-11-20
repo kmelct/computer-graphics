@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import * as THREE from "three";
+
+import { CorrugatedFigure } from "./figures";
 const OrbitControls = require("three-orbit-controls")(THREE);
+
+const figure = new CorrugatedFigure();
 
 class Shape extends Component {
   constructor(props) {
@@ -21,6 +25,8 @@ class Shape extends Component {
     this.mount.appendChild(this.renderer.domElement);
     this.initializeOrbits();
     this.initializeCamera();
+
+    var geometryPositive = new THREE.ParametricGeometry(figure.draw, 25, 25);
 
     const uniforms = {
       amplitude: { value: 5.0 },
@@ -51,6 +57,21 @@ class Shape extends Component {
       }
       `
     });
+
+    var meshPositive = new THREE.Mesh(geometryPositive, shaderMaterial);
+
+    var geo = new THREE.WireframeGeometry(meshPositive.geometry);
+
+    var mat = new THREE.LineBasicMaterial({
+      color: 0xffffff,
+      linewidth: 2
+    });
+
+    var wireframe = new THREE.LineSegments(geo, mat);
+
+    meshPositive.add(wireframe);
+
+    this.scene.add(meshPositive);
 
     this.animate();
   }
