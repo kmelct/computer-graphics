@@ -92,12 +92,14 @@ class Scene extends Component {
       const delta = (this.clock && this.clock.getDelta()) || 0;
       if (this.uniforms) this.uniforms.time.value += delta * 5;
 
-      this.light.position.y = 100;
-      this.light.position.x = 500 * Math.sin(Date.now() / 240);
-      this.light.position.z = 500 * Math.cos(Date.now() / 240);
-      this.meshLight.position.y = 100;
-      this.meshLight.position.x = 500 * Math.sin(Date.now() / 240);
-      this.meshLight.position.z = 500 * Math.cos(Date.now() / 240);
+      const positions = [
+        500 * Math.sin(Date.now() / 240),
+        100,
+        500 * Math.cos(Date.now() / 240)
+      ];
+
+      this.light.position.set(...positions);
+      this.meshLight.position.set(...positions);
       this.figureUniform.delta.value = delta;
     }, 30);
   };
