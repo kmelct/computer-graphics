@@ -5,7 +5,7 @@ export const timeUniform = () => ({
 });
 
 export const figureUniform = () => {
-  const a = three.UniformsUtils.merge([
+  return three.UniformsUtils.merge([
     three.UniformsLib["lights"],
     three.UniformsLib["common"],
     {
